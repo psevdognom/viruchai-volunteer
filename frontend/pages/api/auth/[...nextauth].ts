@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import axios from "axios";
 import { User } from "next-auth";
 
 export interface AuthenticatedUser extends User {
