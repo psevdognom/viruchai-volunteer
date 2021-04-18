@@ -1,6 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import CandidateCard from "./CandidateCard";
 
 const settings = {
     dots: true,
@@ -37,36 +38,33 @@ const settings = {
     ]
 };
 
-const WhomToHelp = () => (
-    <div>
-        <h2> Responsive </h2>
-        <Slider {...settings}>
-            <div>
-                <h3>1</h3>
-            </div>
-            <div>
-                <h3>2</h3>
-            </div>
-            <div>
-                <h3>3</h3>
-            </div>
-            <div>
-                <h3>4</h3>
-            </div>
-            <div>
-                <h3>5</h3>
-            </div>
-            <div>
-                <h3>6</h3>
-            </div>
-            <div>
-                <h3>7</h3>
-            </div>
-            <div>
-                <h3>8</h3>
-            </div>
-        </Slider>
-    </div>
+const Slick = () => (
+    <Slider {...settings} className={"p-4 column"}>
+        <div>
+            <CandidateCard/>
+        </div>
+        <div>
+            <CandidateCard/>
+        </div>
+        <div>
+            <CandidateCard/>
+        </div>
+        <div>
+            <CandidateCard/>
+        </div>
+        <div>
+            <CandidateCard/>
+        </div>
+        <div>
+            <CandidateCard/>
+        </div>
+        <div>
+            <CandidateCard/>
+        </div>
+        <div>
+            <CandidateCard/>
+        </div>
+    </Slider>
 )
 
-export default WhomToHelp
+export default Slick
