@@ -73,6 +73,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # Временная метка показывающая время последнего обновления объекта.
     updated_at = models.DateTimeField(auto_now=True)
+    # candidate = models.BooleanField(default=False)
 
     # Дополнительный поля, необходимые Django
     # при указании кастомной модели пользователя.

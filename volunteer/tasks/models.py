@@ -28,9 +28,16 @@ class Task(models.Model):
     description = models.TextField(blank=True, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    updated_date = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateTimeField(auto_now=False)
     active = models.BooleanField(default=True)
     done = models.BooleanField(default=False)
+
+
+class SkillToTask(models.Model):
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+
 
 
 

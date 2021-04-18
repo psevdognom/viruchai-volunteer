@@ -1,12 +1,14 @@
 from django.db import models
 
+from .utils import UploadTo
+
 # Create your models here.
 
 
 class Candidate(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-    image = models.ImageField()
+    image = models.ImageField(upload_to=UploadTo)
     active = models.BooleanField(default=True)
 
 
@@ -31,6 +33,9 @@ class Election(models.Model):
     election_date = models.DateField(auto_now=False)
     type = models.ForeignKey(ElectionType, on_delete=models.CASCADE)
     district = models.ForeignKey(District, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.name + ' ' +self.district.name
 
 
 class Company(models.Model):
