@@ -1,7 +1,7 @@
 from django.db import models
 
-from volunteer.authentication.models import User
-from volunteer.companies.models import Election, Company
+from authentication.models import User
+from companies.models import Election, Company
 
 # Create your models here.
 
@@ -11,10 +11,16 @@ class SkillCategory(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Skill(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     category = models.ForeignKey(SkillCategory, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.category.name + ' ' + self.name
 
 
 class SkillToUser(models.Model):
@@ -32,12 +38,15 @@ class Task(models.Model):
     deadline = models.DateTimeField(auto_now=False)
     active = models.BooleanField(default=True)
     done = models.BooleanField(default=False)
+    skills = models.ManyToManyField(Skill, through='SkillToTask')
+
+    def __str__(self):
+        return self.name
 
 
 class SkillToTask(models.Model):
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
-
 
 
 
