@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import CandidateCard from "./CandidateCard";
+import CandidateCard from "../../shared-components/CandidateCard";
 
 const settings = {
     dots: true,
