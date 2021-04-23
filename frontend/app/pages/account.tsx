@@ -1,9 +1,9 @@
 import Layout from "../../landing/components/Layout";
 
-const IndexPage = () => (
+const Account = () => (
     <Layout sizeProps={"is-small"}>
 
     </Layout>
 )
 
-export default IndexPage
+export default Account

@@ -3,36 +3,24 @@ import {ReactNode, useState} from "react";
 import {useRouter} from "next/router";
 import Nav from "./Nav";
 import NavBody from "./NavBody";
+import AnimateHeight from 'react-animate-height';
+
+import { Tab } from '../../interfaces/interfaces'
 
 interface Props {
-    sizeProps: "is-small" | "is-large";
+    sizeProps: "is-small" | "is-large",
+    tabList: Tab[]
 }
 
-interface Tab {
-    link: string,
-    title: string,
-}
-
-const tabsList: Tab[] = [
-    {
-        link: '/',
-        title: "Таски",
-    },
-    {
-        link: '/',
-        title: "Кандидаты",
-    },
-    {
-        link: '/how',
-        title: "Чат?",
-    },
-]
-
-const NavBar = ( {sizeProps="is-small"}:Props ) => {
+const NavBar = ( {tabList, sizeProps="is-small"}:Props ) => {
     const router = useRouter()
-    const [size, setSize] = useState(sizeProps)
+
+    const [size] = useState(sizeProps)
     const [activeTab, setActiveTab] = useState(router.route)
-    const hide = (): string  => (size=="is-small") ? "is-hidden" : "";
+
+    // @TODO learn react context and fix animation on NavBody resize
+    const hideNavBody = (): string  => (size=="is-small") ? "0" : "auto";
+    const [height] = useState(hideNavBody())
 
     const renderTabs = (tabs: Tab[]): ReactNode => {
         return tabs.map(tab => {
@@ -55,11 +43,18 @@ const NavBar = ( {sizeProps="is-small"}:Props ) => {
     return (
         <>
             <Nav/>
+            <AnimateHeight
+                duration={ 500 }
+                height={ height }
+            >
+                <NavBody/>
+            </AnimateHeight>
+
             <div className="hero-foot">
                 <nav className="tabs is-boxed is-fullwidth">
                     <div className="container">
                         <ul>
-                            { renderTabs(tabsList) }
+                            { renderTabs(tabList) }
                         </ul>
                     </div>
                 </nav>

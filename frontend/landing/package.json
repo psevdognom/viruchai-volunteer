@@ -12,6 +12,7 @@
     "next": "latest",
     "next-auth": "^3.14.8",
     "react": "^16.13.0",
+    "react-animate-height": "^2.0.23",
     "react-dom": "^16.13.0",
     "react-slick": "^0.28.1",
     "semantic-ui-css": "^2.4.1",

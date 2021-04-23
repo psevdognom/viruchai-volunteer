@@ -14,7 +14,8 @@ const Nav = ({ color="" }:Props) => (
                         <Link href={'/'}><h1>Выручай, волнтер! <RandomEmodji/></h1></Link>
                     </a>
                     <span className="navbar-burger" data-target="navbarMenuHeroB">
-          </span>
+
+                    </span>
                 </div>
                 <div id="navbarMenuHeroB" className="navbar-menu">
                     <div className="navbar-end">

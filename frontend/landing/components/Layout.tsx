@@ -1,5 +1,8 @@
-import NavBar from "../../shared-components/NavBar";
+import NavBar from "../shared-components/NavBar";
 import React, {ReactNode} from "react";
+import Footer from "../shared-components/Footer";
+
+import { tabsList } from "../cms";
 
 interface Props {
     sizeProps: "is-large" | "is-small",
@@ -9,19 +12,10 @@ interface Props {
 const Layout = ({ children, sizeProps="is-large" }:Props) => (
     <>
     <section className={"hero is-info " + sizeProps }>
-        <NavBar sizeProps={sizeProps}/>
+        <NavBar tabList={tabsList} sizeProps={sizeProps}/>
     </section>
         { children }
-    <footer className="footer">
-        <div className="content has-text-centered">
-            <p>
-                <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is
-                licensed
-                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-                is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-            </p>
-        </div>
-    </footer>
+    <Footer/>
     </>
 )
 

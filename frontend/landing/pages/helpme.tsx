@@ -1,5 +1,5 @@
 import 'bulma/css/bulma.css'
-import Nav from "../../shared-components/Nav";
+import Nav from "../shared-components/Nav";
 
 const HelpMe = () => (
     <>

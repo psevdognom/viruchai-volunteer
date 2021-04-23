@@ -1,9 +1,5 @@
-interface Props {
-    isHidden: "is-hidden" | "" | string
-}
-
-const NavBody = ( { isHidden }:Props ) => (
-    <div className={"hero-body " + isHidden}>
+const NavBody = () => (
+    <div className={"hero-body "}>
         <div className="container has-text-centered">
             <p className="title">
                 Выручай, волонтер!
