@@ -1,0 +1,146 @@
+import { auth, firestore, googleAuthProvider } from '../lib/firebase';
+import { UserContext } from '../lib/context';
+import Metatags from '../components/Metatags';
+import 'bulma/css/bulma.css'
+
+import { useEffect, useState, useCallback, useContext } from 'react';
+import debounce from 'lodash.debounce';
+
+export default function Enter() {
+    const { user, username } = useContext(UserContext);
+
+    // 1. user signed out <SignInButton />
+    // 2. user signed in, but missing username <UsernameForm />
+    // 3. user signed in, has username <SignOutButton />
+    return (
+        <main>
+            <Metatags title="Enter" description="Sign up for this amazing app!" />
+            {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
+        </main>
+    );
+}
+
+// Sign in with Google button
+function SignInButton() {
+    const signInWithGoogle = async () => {
+        await auth.signInWithPopup(googleAuthProvider);
+    };
+
+    return (
+        <div className="container py-6">
+                <h1 className={"is-size-2"}>Конфиденциальность</h1>
+                <p/>
+                <p>Для нас это не просто слово. Мы не храним ваших контактных данных. Разработчикам была поставлена задача защитить данные потенциальных волонтеров от утечки.
+                   Но поскольку в современном мире защититься от утечек невозможно, мы решили минимизировать риски на нашей стороне.
+                   Для авторизации были выбранны сторонние провайдеры с именем, которые не готовы отдавать ваши данные в обход юридических процедур.
+                </p>
+                <p/>
+            <div className="is-flex is-justify-content-center y-5">
+                <button className="btn-google" onClick={signInWithGoogle}>
+                    <img alt="Google auth button" src={'/google.png'} width="30px" /> Sign in with Google
+                </button>
+            </div>
+        </div>
+    );
+}
+
+// Sign out button
+function SignOutButton() {
+    return <button onClick={() => auth.signOut()}>Sign Out</button>;
+}
+
+// Username form
+function UsernameForm() {
+    const [formValue, setFormValue] = useState('');
+    const [isValid, setIsValid] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const { user, username } = useContext(UserContext);
+
+    // @ts-ignore
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        // Create refs for both documents
+        // @ts-ignore
+        const userDoc = firestore.doc(`users/${user.uid}`);
+        const usernameDoc = firestore.doc(`usernames/${formValue}`);
+
+        // Commit both docs together as a batch write.
+        const batch = firestore.batch();
+        // @ts-ignore
+        batch.set(userDoc, { username: formValue, photoURL: user.photoURL, displayName: user.displayName });
+        // @ts-ignore
+        batch.set(usernameDoc, { uid: user.uid });
+
+        await batch.commit();
+    };
+
+    // @ts-ignore
+    const onChange = (e) => {
+        // Force form value typed in form to match correct format
+        const val = e.target.value.toLowerCase();
+        const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
+
+        // Only set form value if length is < 3 OR it passes regex
+        if (val.length < 3) {
+            setFormValue(val);
+            setLoading(false);
+            setIsValid(false);
+        }
+
+        if (re.test(val)) {
+            setFormValue(val);
+            setLoading(true);
+            setIsValid(false);
+        }
+    };
+
+    //
+
+    useEffect(() => {
+        checkUsername(formValue);
+    }, [formValue]);
+
+    // Hit the database for username match after each debounced change
+    // useCallback is required for debounce to work
+    const checkUsername = useCallback(
+        debounce(async (username) => {
+            if (username.length >= 3) {
+                const ref = firestore.doc(`usernames/${username}`);
+                const { exists } = await ref.get();
+                setIsValid(!exists);
+                setLoading(false);
+            }
+        }, 500),
+        []
+    );
+
+    return (
+        !username && (
+            <div className="container py-5">
+                <h3>Выберите имя пользователя</h3>
+                <form onSubmit={onSubmit}>
+                    <input name="username" placeholder="myname" value={formValue} onChange={onChange} />
+                    <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
+                    <button type="submit" className="btn-green" disabled={!isValid}>
+                        Выбрать
+                    </button>
+                </form>
+            </div>
+        )
+    );
+}
+
+// @ts-ignore
+function UsernameMessage({ username, isValid, loading }) {
+    if (loading) {
+        return <p>Проверяю...</p>;
+    } else if (isValid) {
+        return <p className="text-success">{username} доступно!</p>;
+    } else if (username && !isValid) {
+        return <p className="text-danger">Такое имя уже занято!</p>;
+    } else {
+        return <p>Выйти</p>;
+    }
+}
