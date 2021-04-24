@@ -2,40 +2,44 @@ import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { User } from "next-auth";
+import axios from 'axios'
 
 export interface AuthenticatedUser extends User {
     accessToken?: string,
     refreshToken?: string,
 }
 
-const settings = {
-    providers: [
+const providers = [
         Providers.GitHub({
-            clientId: process.env.GITHUB_CLIENT_ID,
-            clientSecret: process.env.GITHUB_CLIENT_SECRET
+            clientId: "89222c56a20c8a922291",
+            clientSecret: "c5e81e39bfc16f500fe9ee1215e475f433734785"
         }),
-    ],
-    callbacks: {
-        async signIn(user, account, profile) {
-            console.log("SIGNIN:", user, account, profile)
-            return true;
-        },
-        async redirect(url, baseUrl) {
-            console.log("REDIRECT:", url, baseUrl)
-            return baseUrl
-        },
-        async session(session, user) {
-            console.log("SESSION:", session, user)
-            return session
-        },
-        async jwt(token, user, account, profile, isNewUser) {
-            console.log("JWT:", token, user, account, profile, isNewUser)
-            return token
+    ]
+
+const callbacks = {
+    async jwt(token, user) {
+        if (user) {
+            token.accessToken = user.token
         }
+        console.log(token)
+        return token
+    },
+
+    async session(session, token) {
+        session.accessToken = token.accessToken
+        console.log(session)
+        return session
     }
 }
 
-export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, settings);
+
+const options = {
+    providers,
+    callbacks
+}
+
+
+export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options);
 
 
 /*

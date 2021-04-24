@@ -5,17 +5,15 @@ import Nav from "./Nav";
 import NavBody from "./NavBody";
 import AnimateHeight from 'react-animate-height';
 
-import { Tab } from '../../interfaces/interfaces'
+import { Tab } from '../interfaces/interfaces'
 
 interface Props {
-    sizeProps: "is-small" | "is-large",
     tabList: Tab[]
 }
 
-const NavBar = ( {tabList, sizeProps="is-small"}:Props ) => {
+const NavBar = ( {tabList}:Props ) => {
     const router = useRouter()
-
-    const [size] = useState(sizeProps)
+    const [size] = useState(router.pathname == '/' ? "is-large" : "is-small")
     const [activeTab, setActiveTab] = useState(router.route)
 
     // @TODO learn react context and fix animation on NavBody resize

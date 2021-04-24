@@ -1,4 +1,4 @@
-import { Tab } from '../interfaces/interfaces'
+import { Tab } from './interfaces/interfaces'
 
 export const tabsList: Tab[] = [
     {
