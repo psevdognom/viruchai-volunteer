@@ -11,11 +11,11 @@ interface Props {
 
 const Layout = ({ children, sizeProps="is-large" }:Props) => (
     <>
-    <section className={"hero is-info " + sizeProps }>
-        <NavBar tabList={tabsList} sizeProps={sizeProps}/>
-    </section>
-        { children }
-    <Footer/>
+        <section className={"hero is-info " + sizeProps }>
+            <NavBar tabList={tabsList} sizeProps={sizeProps}/>
+        </section>
+            { children }
+        <Footer/>
     </>
 )
 
