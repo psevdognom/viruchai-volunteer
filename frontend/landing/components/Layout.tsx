@@ -1,22 +1,28 @@
-import NavBar from "../shared-components/NavBar";
 import React, {ReactNode} from "react";
-import Footer from "../shared-components/Footer";
+import NavTabs from "./NavTabs";
+import { defaultTabsList, accountTabsList } from '../cms'
+import NavBody from "./NavBody";
+import {useRouter} from "next/router";
 
-import { tabsList } from "../cms";
 
 interface Props {
-    sizeProps: "is-large" | "is-small",
-    children?: ReactNode
+    children: ReactNode
 }
 
-const Layout = ({ children, sizeProps="is-large" }:Props) => (
-    <>
-        <section className={"hero is-info " + sizeProps }>
-            <NavBar tabList={tabsList} sizeProps={sizeProps}/>
-        </section>
-            { children }
-        <Footer/>
-    </>
-)
+const Layout = ({children}:Props) => {
+    const router = useRouter()
+    const accountTabsListURLs = accountTabsList.map(account => account.link)
+    const ifAccountTabs = accountTabsListURLs.includes(router.route)
+
+    return (
+        <>
+            <NavBody/>
+            <NavTabs tabList={ ifAccountTabs ? accountTabsList : defaultTabsList}/>
+            <div className="container py-5">
+                {children}
+            </div>
+        </>
+    )
+}
 
 export default Layout

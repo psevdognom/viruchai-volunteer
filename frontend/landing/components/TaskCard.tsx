@@ -1,19 +1,37 @@
-import React from 'react'
-import { Image, Item } from 'semantic-ui-react'
+import 'bulma/css/bulma.css'
+import {Task} from "../interfaces/interfaces";
 
-const TaskCard = () => (
-        <Item>
-            <Item.Image size='tiny' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+interface Props {
+    task: Task
+}
 
-            <Item.Content>
-                <Item.Header as='a'>Header</Item.Header>
-                <Item.Meta>Description</Item.Meta>
-                <Item.Description>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-                </Item.Description>
-                <Item.Extra>Additional Details</Item.Extra>
-            </Item.Content>
-        </Item>
+const TaskCard = ( {task}:Props ) => (
+    <div className="card is-flex is-flex-direction-row my-3">
+        <div className="card-image">
+            <figure className="image is-4by3">
+                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image"/>
+            </figure>
+        </div>
+
+        <div className="card-content">
+            <div className="media">
+                <div className="media-left">
+                    <figure className="image is-48x48">
+                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"/>
+                    </figure>
+                </div>
+                <div className="media-content">
+                    <p className="title is-4">{task.title}</p>
+                    <p className="subtitle is-6">{task.candidate}</p>
+                </div>
+            </div>
+
+            <div className="content">
+                <p>{task.desc}</p>
+                    <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+            </div>
+        </div>
+    </div>
 )
 
 export default TaskCard

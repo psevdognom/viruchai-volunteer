@@ -5,11 +5,11 @@ import 'semantic-ui-css/semantic.min.css'
 export default class FAQ extends Component {
     state = { activeIndex: 0 }
 
-    handleClick = (e, titleProps) => {
+    // @ts-ignore
+    handleClick = (titleProps) => {
         const { index } = titleProps
         const { activeIndex } = this.state
         const newIndex = activeIndex === index ? -1 : index
-
         this.setState({ activeIndex: newIndex })
     }
 

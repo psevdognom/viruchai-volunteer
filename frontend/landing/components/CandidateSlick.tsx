@@ -1,7 +1,8 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import CandidateCard from "../shared-components/CandidateCard";
+import CandidateCard from "./CandidateCard";
+import {Candidate} from "../interfaces/interfaces";
 
 const settings = {
     dots: true,
@@ -38,33 +39,19 @@ const settings = {
     ]
 };
 
-const Slick = () => (
+interface Props {
+    candidates: Candidate[]
+}
+
+const CandidateSlick = ({candidates}: Props) => (
     <Slider {...settings} className={"p-4 column"}>
-        <div>
-            <CandidateCard/>
-        </div>
-        <div>
-            <CandidateCard/>
-        </div>
-        <div>
-            <CandidateCard/>
-        </div>
-        <div>
-            <CandidateCard/>
-        </div>
-        <div>
-            <CandidateCard/>
-        </div>
-        <div>
-            <CandidateCard/>
-        </div>
-        <div>
-            <CandidateCard/>
-        </div>
-        <div>
-            <CandidateCard/>
-        </div>
+        { candidates.map(candidate =>
+            <div>
+                <CandidateCard candidate={candidate}/>
+            </div>
+        )}
+
     </Slider>
 )
 
-export default Slick
+export default CandidateSlick

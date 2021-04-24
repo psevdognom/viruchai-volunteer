@@ -6,7 +6,7 @@ const Task = () => {
     const router = useRouter()
 
     return (
-        <Layout sizeProps={'is-small'}>
+        <Layout>
         <div className="tab-pane is-active p-6" id="pane-2">
             <div className="content">
                 <div className="controls is-flex is-justify-content-space-between">

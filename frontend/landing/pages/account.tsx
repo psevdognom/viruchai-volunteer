@@ -1,10 +1,19 @@
 import Layout from "../components/Layout";
 import 'bulma/css/bulma.css'
+import AuthCheck from "../components/AuthCheck";
+import {useContext} from "react";
+import {UserContext} from "../lib/context";
 
-const Account = () => (
-    <Layout sizeProps={"is-small"}>
+const Account = () => {
+    const { username } = useContext(UserContext);
 
-    </Layout>
-)
+    return (
+        <Layout>
+            <AuthCheck>
+                {username}
+            </AuthCheck>
+        </Layout>
+    )
+}
 
 export default Account

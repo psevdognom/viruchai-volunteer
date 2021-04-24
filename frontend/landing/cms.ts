@@ -1,6 +1,6 @@
-import { Tab } from '../interfaces/interfaces'
+import { Tab } from './interfaces/interfaces'
 
-export const tabsList: Tab[] = [
+export const defaultTabsList: Tab[] = [
     {
         link: '/',
         title: "Как помочь?",
@@ -18,3 +18,19 @@ export const tabsList: Tab[] = [
         title: "Где?",
     },
 ]
+
+export const accountTabsList: Tab[] = [
+    {
+        link: '/tasks',
+        title: "Доступные задачи",
+    },
+    {
+        link: '/chats',
+        title: "Чаты",
+    },
+    {
+        link: '/account',
+        title: "Мой аккаунт",
+    }
+]
+

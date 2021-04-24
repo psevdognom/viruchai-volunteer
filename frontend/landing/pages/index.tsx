@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import FAQ from "../components/FAQ";
 
 const HomeLanding = () => (
-    <Layout sizeProps={"is-large"}>
+    <Layout>
         <div className="box cta">
             <p className="has-text-centered">
                 <span className="tag is-primary">New</span> Ut enim ad minim veniam, quis nostrud exercitation
