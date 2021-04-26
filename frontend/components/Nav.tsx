@@ -1,15 +1,12 @@
 import RandomEmodji from "./RandomEmodji";
 import Link from "next/link"
-import { useContext } from 'react';
-import {UserContext} from "../lib/context";
-import {auth} from "../lib/firebase";
 
 interface Props {
     color?: "" | "is-link"
 }
 
 const Nav = ({ color="" }:Props) => {
-    const { username } = useContext(UserContext);
+    const username = true
 
 
     return (
@@ -38,7 +35,7 @@ const Nav = ({ color="" }:Props) => {
                                       <Link href={'/enter'}>Войти</Link>
                                   }
                               </a>
-                            {username ? <a onClick={() => auth.signOut()} className="button is-info is-inverted">Выйти</a> : '' }
+                            {username ? <a onClick={() => console.log("singOut")} className="button is-info is-inverted">Выйти</a> : '' }
                         </span>
                     </div>
                 </div>

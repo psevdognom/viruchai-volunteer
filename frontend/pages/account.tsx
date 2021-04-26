@@ -1,11 +1,9 @@
 import Layout from "../components/Layout";
 import 'bulma/css/bulma.css'
 import AuthCheck from "../components/AuthCheck";
-import {useContext} from "react";
-import {UserContext} from "../lib/context";
 
 const Account = () => {
-    const { username } = useContext(UserContext);
+    const username = true;
 
     return (
         <Layout>

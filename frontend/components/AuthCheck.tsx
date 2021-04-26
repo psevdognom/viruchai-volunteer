@@ -1,12 +1,10 @@
 import Link from 'next/link';
-import { useContext } from 'react';
-import { UserContext } from '../lib/context';
 import 'bulma/css/bulma.css'
 
 // Component's children only shown to logged-in users
 // @ts-ignore
 export default function AuthCheck(props) {
-    const { username } = useContext(UserContext);
+    const username = false
 
     return username ? props.children : props.fallback || (
         <article className="message is-danger">

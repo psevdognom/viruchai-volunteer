@@ -6,5 +6,3 @@ from .models import *
 @admin.register(SkillCategory)
 class SkillCategoryAdmin(admin.ModelAdmin):
     pass
-
-@admin
