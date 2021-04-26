@@ -3,9 +3,11 @@ cffi==1.14.5
 cryptography==3.4.7
 Django==3.2
 django-appconf==1.0.4
+django-admin-sortable2==1.0
 django-debug-toolbar==3.2.1
 django-image-cropping==1.5.0
 djangorestframework==3.12.4
+drf-yasg==1.20.0
 easy-thumbnails==2.7.1
 Pillow==8.2.0
 pycparser==2.20
