@@ -1,13 +1,13 @@
 import RandomEmodji from "./RandomEmodji";
 import Link from "next/link"
+import { signIn, signOut, useSession } from "next-auth/client";
 
 interface Props {
     color?: "" | "is-link"
 }
 
 const Nav = ({ color="" }:Props) => {
-    const username = true
-
+    const [session, loading] = useSession();
 
     return (
     <div className={"hero-head " + color}>
@@ -30,12 +30,11 @@ const Nav = ({ color="" }:Props) => {
                         </Link>
                         <span className="navbar-item">
                               <a className="button is-info is-inverted mx-2">
-                                  {username ?
-                                      <Link href={'/account'}>Личный кабинет</Link> :
-                                      <Link href={'/enter'}>Войти</Link>
+                                  {!loading && !session ?
+                                      <a onClick={() => signIn()}>Войти</a> : <Link href={'/account'}>Личный кабинет</Link>
                                   }
                               </a>
-                            {username ? <a onClick={() => console.log("singOut")} className="button is-info is-inverted">Выйти</a> : '' }
+                            {!loading && session ? <a onClick={() => signOut()} className="button is-info is-inverted">Выйти</a> : '' }
                         </span>
                     </div>
                 </div>

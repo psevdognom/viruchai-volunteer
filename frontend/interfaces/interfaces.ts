@@ -1,3 +1,5 @@
+import { User } from "next-auth";
+
 export interface Tab {
     link: string,
     title: string,
@@ -28,4 +30,9 @@ export interface Task {
     img?: string,
     applicants?: object,
     chatGroupID?: number
+}
+
+export interface AuthenticatedUser extends User {
+    accessToken?: string,
+    refreshToken?: string,
 }

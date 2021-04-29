@@ -10,7 +10,6 @@ interface Props {
 
 const HowIndex = ({categories}:Props) => (
     <Layout>
-
             <ul>
                 {categories.map(category =>
                     <li id={category.slug}> <Link href={'/how/' + category.slug}>{category.title}</Link></li>

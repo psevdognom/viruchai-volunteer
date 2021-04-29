@@ -30,6 +30,6 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('authentication/', include('authentication.urls')),
+    path('api/social/login/', include('authentication.urls')),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0))
 ]
