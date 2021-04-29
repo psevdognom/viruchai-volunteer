@@ -49,7 +49,6 @@ class SkillToTask(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
 
-
 class UserToTask(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)

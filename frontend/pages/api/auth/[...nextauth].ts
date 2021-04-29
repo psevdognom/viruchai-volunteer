@@ -14,7 +14,7 @@ const settings: InitOptions = {
         }),
     ],
     callbacks: {
-        async signIn(user: AuthenticatedUser, account, profile) {
+        async signIn(user: AuthenticatedUser, account: { provider?: any; accessToken?: any; idToken?: any; }, profile: any) {
             if (account.provider === "google") {
                 const { accessToken, idToken } = account;
 
@@ -38,7 +38,7 @@ const settings: InitOptions = {
             return false;
         },
 
-        async jwt(token, user: AuthenticatedUser, account, profile, isNewUser) {
+        async jwt(token: { accessToken: string | undefined; }, user: AuthenticatedUser, account: any, profile: any, isNewUser: any) {
             if (user) {
                 const { accessToken } = user;
                 token.accessToken = accessToken;
@@ -47,7 +47,7 @@ const settings: InitOptions = {
             return token;
         },
 
-        async session(session, user: AuthenticatedUser) {
+        async session(session: { accessToken: string | undefined; }, user: AuthenticatedUser) {
             session.accessToken = user.accessToken;
             return session;
         },

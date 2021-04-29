@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    "graphene_django",
+
     'adminsortable2',
 
     'rest_framework',
@@ -66,8 +68,7 @@ INSTALLED_APPS = [
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
-            'profile',
-            'email',
+            'profile'
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',
@@ -150,7 +151,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': True,
-    "USER_ID_FIELD": "userId",  # for the custom user model
+    "USER_ID_FIELD": "userId",
     "USER_ID_CLAIM": "user_id",
     "SIGNING_KEY": JWT_SECRET_KEY
 }
@@ -214,4 +215,9 @@ AUTH_USER_MODEL = 'authentication.User'
 CORS_ORIGIN_ALLOW_ALL = True
 
 SITE_ID = 1
+
 REST_USE_JWT = True
+
+GRAPHENE = {
+    "SCHEMA": "django_root.schema.schema"
+}
