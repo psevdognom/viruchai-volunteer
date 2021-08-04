@@ -4,14 +4,14 @@ import 'firebase/firestore';
 import 'firebase/storage';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDJkD2W4GiU09ogFi7qZ8c_lbp6QlZY81k",
+    apiKey: "",
     authDomain: "viruchai-volunteer.firebaseapp.com",
     databaseURL: "https://viruchai-volunteer-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "viruchai-volunteer",
     storageBucket: "viruchai-volunteer.appspot.com",
-    messagingSenderId: "151614782220",
-    appId: "1:151614782220:web:1bfda710640b53efbda729",
-    measurementId: "G-2PW0TR86QY"
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
 };
 
 if (!firebase.apps.length) {
